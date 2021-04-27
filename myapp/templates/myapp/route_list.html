@@ -1,0 +1,41 @@
+{% extends "base.html" %} {% block content %}
+<div id="map" class="m-3" style="width: 600px; height: 600px"></div>
+
+{% for object in object_list %}
+<div class="m-2"><a href="{{object.get_absolute_url}}">{{object}}</a></div>
+{% endfor %}
+<div>
+    <a class="btn btn-primary" href="{% url 'myapp_Route_create' %}">Create a new Route</a>
+</div>
+{% endblock %} {% block head %}
+<link href="//npmcdn.com/leaflet/dist/leaflet.css" rel="stylesheet" />
+<style>
+    .leaflet-shadow-pane {
+        display: none;
+    }
+
+    .leaflet-marker-pane {
+        display: none;
+    }
+</style>
+<script src="//npmcdn.com/leaflet/dist/leaflet-src.js"></script>
+<script src="https://api.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js"></script>
+{% endblock %} {% block script %}
+<script>
+    var map = L.map('map');
+
+    L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/slopemap/{z}/{x}/{y}.png', {
+        attribution: "<a href='https://maps.gsi.go.jp/development/ichiran.html' target='_blank'>地理院タイル</a>"
+    }).addTo(map);
+
+    map.setView([35.91685961322499, 138.71269226074222], 7);
+    // {% for object in object_list %}
+    omnivore.kml('{{ object.file.url }}', null,
+        L.geoJson(null,
+            { style: { color: 'red', weight: 1, opacity: 1 }, })).addTo(map);
+    // {% endfor %}
+    map.on('move', function (e) {
+        console.log(map.getCenter());
+    });
+</script>
+{% endblock %}

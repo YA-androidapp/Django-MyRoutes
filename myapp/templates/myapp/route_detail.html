@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load static %}
+{% load fileupload %}
+{% block content %}
+<p>
+    <a class="btn btn-light" href="{% url 'myapp_Route_list' %}">
+        Route Listing
+    </a>
+</p>
+
+<table class="table">
+    <tr>
+        <td>name</td>
+        <td>{{ object.name }}</td>
+    </tr>
+    <tr>
+        <td>file</td>
+        <td><a href="{{ object.file.url }}">{{object.file | get_filename }}</a></td>
+    </tr>
+    <tr>
+        <td>map</td>
+        <td>
+            <div id="map" style="width: 400px; height: 400px"></div>
+        </td>
+    </tr>
+    <tr>
+        <td>last_updated</td>
+        <td>{{ object.last_updated }}</td>
+    </tr>
+    <tr>
+        <td>created</td>
+        <td>{{ object.created }}</td>
+    </tr>
+    <tr></tr>
+    <td>created by</td>
+    <td><a href="{{object.created_by.get_absolute_url}}">{{ object.created_by.username }}</a></td>
+    </tr>
+</table>
+<a class="btn btn-primary" href="{{object.get_update_url}}">Edit</a>
+{% endblock %}
+
+{% block head %}
+<link href="//npmcdn.com/leaflet/dist/leaflet.css" rel="stylesheet" />
+<style>
+    .leaflet-shadow-pane {
+        display: none;
+    }
+
+    .leaflet-marker-pane {
+        display: none;
+    }
+</style>
+<script src="//npmcdn.com/leaflet/dist/leaflet-src.js"></script>
+<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js'></script>
+{% endblock %}
+
+{% block script %}
+<script>
+    var map = L.map('map');
+
+    L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/slopemap/{z}/{x}/{y}.png', {
+        attribution: "<a href='https://maps.gsi.go.jp/development/ichiran.html' target='_blank'>地理院タイル</a>"
+    }).addTo(map);
+
+    map.setView([35.91685961322499, 138.71269226074222], 7);
+
+    omnivore.kml('{{ object.file.url }}', null,
+        L.geoJson(null,
+            { style: { color: 'red', weight: 1, opacity: 1 }, })).addTo(map);
+
+    map.on('move', function (e) {
+        console.log(map.getCenter());
+    });
+</script>
+{% endblock %}

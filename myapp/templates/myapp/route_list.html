@@ -7,7 +7,9 @@
 <div>
     <a class="btn btn-primary" href="{% url 'myapp_Route_create' %}">Create a new Route</a>
 </div>
-{% endblock %} {% block head %}
+{% endblock %}
+
+{% block head %}
 <link href="//npmcdn.com/leaflet/dist/leaflet.css" rel="stylesheet" />
 <style>
     .leaflet-shadow-pane {
@@ -18,9 +20,11 @@
         display: none;
     }
 </style>
+{% endblock %}
+
+{% block script %}
 <script src="//npmcdn.com/leaflet/dist/leaflet-src.js"></script>
 <script src="https://api.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js"></script>
-{% endblock %} {% block script %}
 <script>
     var map = L.map('map');
 

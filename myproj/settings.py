@@ -32,6 +32,16 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'myapp',
+
+    # django-allauth
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.github',
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.microsoft',
+    'allauth.socialaccount.providers.twitter',
 ]
 
 MIDDLEWARE = [
@@ -98,9 +108,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ja'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Tokyo'
 
 USE_I18N = True
 
@@ -113,12 +123,30 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 
-#
+# User model to use auth
 AUTH_USER_MODEL = 'myapp.AppUser'
 
 
-#
+# File upload
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+
+# django-allauth
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_LOGOUT_REDIRECT_URL = '/accounts/login/'
+ACCOUNT_USERNAME_REQUIRED = True
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = '/accounts/login/'
+SITE_ID = 1

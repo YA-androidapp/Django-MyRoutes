@@ -9,7 +9,7 @@ class RouteListView(generic.ListView):
     form_class = forms.RouteForm
 
 
-class RouteCreateView(generic.CreateView, LoginRequiredMixin):
+class RouteCreateView(LoginRequiredMixin, generic.CreateView):
     model = models.Route
     form_class = forms.RouteForm
 
@@ -18,12 +18,12 @@ class RouteCreateView(generic.CreateView, LoginRequiredMixin):
         return super(RouteCreateView, self).form_valid(form)
 
 
-class RouteDetailView(generic.DetailView, LoginRequiredMixin):
+class RouteDetailView(LoginRequiredMixin, generic.DetailView):
     model = models.Route
     form_class = forms.RouteForm
 
 
-class RouteUpdateView(generic.UpdateView, LoginRequiredMixin):
+class RouteUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = models.Route
     form_class = forms.RouteForm
     pk_url_kwarg = "pk"
@@ -34,6 +34,6 @@ class AppUserListView(generic.ListView):
     form_class = forms.AppUserForm
 
 
-class AppUserDetailView(generic.DetailView, LoginRequiredMixin):
+class AppUserDetailView(LoginRequiredMixin, generic.DetailView):
     model = models.AppUser
     form_class = forms.AppUserForm

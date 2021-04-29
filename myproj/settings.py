@@ -33,6 +33,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'myapp',
 
+    # django-bootstrap4
+    'bootstrap4',
+
     # django-allauth
     'django.contrib.sites',
     'allauth',

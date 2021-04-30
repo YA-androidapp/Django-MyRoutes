@@ -24,7 +24,7 @@ SECRET_KEY = env('SECRET_KEY', default='^l)7d*%h&db4uft@dk%h-w&nup#pu%)a!d)c7jwg
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool('DEBUG', default=False)
 
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['*'])
 
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
@@ -69,7 +69,7 @@ ROOT_URLCONF = 'myproj.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -89,7 +89,7 @@ WSGI_APPLICATION = 'myproj.wsgi.application'
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
 DATABASES = {
-    'default':env.db(),
+    'default':env.db('DATABASE_URL', default='sqlite:///db.sqlite3'),
 }
 
 

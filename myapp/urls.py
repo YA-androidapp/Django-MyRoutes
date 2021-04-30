@@ -18,6 +18,7 @@ urlpatterns = (
          views.RouteDetailView.as_view(), name="myapp_Route_detail"),
     path("route/update/<int:pk>/",
          views.RouteUpdateView.as_view(), name="myapp_Route_update"),
+    path('route/delete/<int:pk>/', views.RouteDeleteView.as_view(), name='myapp_Route_delete'),
     path("user/", views.AppUserListView.as_view(),
          name="myapp_AppUser_list"),
     path("user/detail/<int:pk>/",

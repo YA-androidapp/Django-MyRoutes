@@ -8,41 +8,41 @@
     </a>
 </p>
 
-<table class="table">
-    <tr>
-        <td>name</td>
-        <td>{{ object.name }}</td>
-    </tr>
-    <tr>
-        <td>file</td>
-        <td><a href="{{ object.file.url }}">{{object.file | get_filename }}</a></td>
-    </tr>
-    <tr>
-        <td>map</td>
-        <td>
-            <div id="map" style="width: 400px; height: 400px"></div>
-        </td>
-    </tr>
-    <tr>
-        <td>last_updated</td>
-        <td>{{ object.last_updated }}</td>
-    </tr>
-    <tr>
-        <td>created</td>
-        <td>{{ object.created }}</td>
-    </tr>
-    <tr>
-        <td>created by</td>
-        <td><a href="{{object.created_by.get_absolute_url}}">{{ object.created_by.username }}</a></td>
-    </tr>
-    <tr>
-        <td></td>
-        <td>
-            <a class="btn btn-primary" href="{{object.get_update_url}}">Edit</a>
-            <a class="btn btn-danger" href="{% url 'myapp_Route_delete' object.pk %}">Delete</a>
-        </td>
-    </tr>
-</table>
+<form action="" method="post">
+    {% csrf_token %}
+    <table class="table">
+        <tr>
+            <td>name</td>
+            <td>{{ object.name }}</td>
+        </tr>
+        <tr>
+            <td>file</td>
+            <td><a href="{{ object.file.url }}">{{object.file | get_filename }}</a></td>
+        </tr>
+        <tr>
+            <td>map</td>
+            <td>
+                <div id="map" style="width: 400px; height: 400px"></div>
+            </td>
+        </tr>
+        <tr>
+            <td>last_updated</td>
+            <td>{{ object.last_updated }}</td>
+        </tr>
+        <tr>
+            <td>created</td>
+            <td>{{ object.created }}</td>
+        </tr>
+        <tr>
+            <td>created by</td>
+            <td><a href="{{object.created_by.get_absolute_url}}">{{ object.created_by.username }}</a></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><button type="submit" class="submit delete btn btn-danger">Delete this item</button></td>
+        </tr>
+    </table>
+</form>
 {% endblock %}
 
 {% block head %}

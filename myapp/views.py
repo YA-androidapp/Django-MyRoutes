@@ -1,6 +1,6 @@
 from . import forms
 from . import models
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse_lazy
 from django.views import generic
 
@@ -30,9 +30,12 @@ class RouteUpdateView(LoginRequiredMixin, generic.UpdateView):
     pk_url_kwarg = "pk"
 
 
-class RouteDeleteView(generic.edit.DeleteView):
+class RouteDeleteView(LoginRequiredMixin, UserPassesTestMixin, generic.edit.DeleteView):
     model = models.Route
     success_url = reverse_lazy('myapp_Route_list')
+
+    def test_func(self):
+        return self.request.user.is_superuser or self.request.user.is_staff
 
 
 class AppUserListView(generic.ListView):

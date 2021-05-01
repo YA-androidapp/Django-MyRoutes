@@ -7,7 +7,7 @@ from django.core.validators import FileExtensionValidator
 class Route(models.Model):
 
     # Relationships
-    created_by = models.ForeignKey("myapp.AppUser", on_delete=models.CASCADE)
+    created_by = models.ForeignKey("myapp.AppUser", on_delete=models.CASCADE, related_name='routes')
 
     # Fields
     name = models.TextField(max_length=100)

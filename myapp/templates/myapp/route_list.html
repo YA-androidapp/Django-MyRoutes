@@ -1,11 +1,27 @@
-{% extends "base.html" %} {% block content %}
+{% extends "base.html" %}
+
+{% block content %}
+<p>
+    <a class="btn btn-primary" href="{% url 'myapp_Route_create' %}">Create a new Route</a>
+</p>
+
 <div id="map" class="m-3" style="width: 600px; height: 600px"></div>
 
-{% for object in object_list %}
-<div class="m-2"><a href="{{object.get_absolute_url}}">{{object}}</a></div>
-{% endfor %}
 <div>
-    <a class="btn btn-primary" href="{% url 'myapp_Route_create' %}">Create a new Route</a>
+    <ul class="list-group"></ul>
+    {% for object in object_list %}
+    <li class="list-group-item">
+        <div>
+            <a href="{{object.get_absolute_url}}">{{object.name}}</a>
+        </div>
+        <div class="pl-3">
+            <small>
+                <a href="{{object.created_by.get_absolute_url}}">{{object.created_by.username}}</a>
+            </small>
+        </div>
+    </li>
+    {% endfor %}
+    </ul>
 </div>
 {% endblock %}
 

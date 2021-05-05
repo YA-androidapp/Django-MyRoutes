@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 
 {% block content %}
-<p>
-    <a class="btn btn-primary" href="{% url 'myapp_Route_create' %}">Create a new Route</a>
+<p><a class="btn btn-primary" href="{% url 'myapp_Route_create' %}">Create a new Route</a>
+    <a class="btn btn-secondary" href="{% url 'myapp_Route_upload' %}">Upload route files</a>
 </p>
 
 <div id="map" class="m-3" style="width: 600px; height: 600px"></div>

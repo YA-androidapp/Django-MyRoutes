@@ -29,9 +29,9 @@ class RouteMultipleUploadForm(forms.Form):
 
         file_list = []
         for upload_file in self.files.getlist('file'):
-            file_name = default_storage.save(os.path.join(upload_to, upload_file.name), upload_file)
-            # file_path = default_storage.url(file_name)
-            file_list.append(file_name)
+            file_path = os.path.join(upload_to, upload_file.name)
+            file_name = default_storage.save(models.custom_upload_to(self, file_path), upload_file)
+            file_list.append(file_path)
         return file_list
 
 

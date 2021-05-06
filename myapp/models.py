@@ -3,6 +3,18 @@ from django.urls import reverse
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import FileExtensionValidator
 
+import hashlib
+from datetime import datetime
+
+def custom_upload_to(instance, filename):
+    current_time = datetime.now()
+    print('instance', instance)
+    pre_hash_name = '{}{}'.format(filename, current_time)
+    extension = str(filename).split('.')[-1]
+    hs_filename = '{}.{}'.format(hashlib.md5(pre_hash_name.encode()).hexdigest(), extension)
+    saved_path = 'upload/files/'
+    return '{}{}'.format(saved_path, hs_filename)
+
 
 class Route(models.Model):
 
@@ -12,7 +24,7 @@ class Route(models.Model):
     # Fields
     name = models.TextField(max_length=100)
     file = models.FileField(
-        upload_to="upload/files/",
+        upload_to=custom_upload_to,
         validators=[FileExtensionValidator(['kml', ])],
     )
     last_updated = models.DateTimeField(auto_now=True, editable=False)

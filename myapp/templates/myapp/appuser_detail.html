@@ -55,6 +55,21 @@
             </ul>
         </td>
     </tr>
+    <tr>
+        <td>images</td>
+        <td>
+            <ul class="list-group">
+                {% for image in object.images.all %}
+                <li class="list-group-item">
+                    <a href="{{image.get_absolute_url}}">
+                        <img src="/media/{{image.image}}" alt="{{image.title}}" class="img-fluid"
+                            style="max-width: 100%; height: auto;">
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </td>
+    </tr>
 </table>
 {% endblock %}
 

@@ -8,6 +8,7 @@ from . import views
 router = routers.DefaultRouter()
 router.register("Route", api.RouteViewSet)
 router.register("AppUser", api.AppUserViewSet)
+router.register("Image", api.ImageViewSet)
 
 urlpatterns = (
     path("api/v1/", include(router.urls)),
@@ -25,4 +26,8 @@ urlpatterns = (
          name="myapp_AppUser_list"),
     path("user/detail/<int:pk>/",
          views.AppUserDetailView.as_view(), name="myapp_AppUser_detail"),
+    path("myapp/image/", views.ImageListView.as_view(), name="myapp_Image_list"),
+    path("myapp/image/create/", views.ImageCreateView.as_view(), name="myapp_Image_create"),
+    path("myapp/image/detail/<int:pk>/", views.ImageDetailView.as_view(), name="myapp_Image_detail"),
+    path("myapp/image/update/<int:pk>/", views.ImageUpdateView.as_view(), name="myapp_Image_update"),
 )

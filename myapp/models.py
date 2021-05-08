@@ -60,3 +60,29 @@ class AppUser(AbstractUser):
 
     def get_update_url(self):
         return reverse("myapp_AppUser_update", args=(self.pk,))
+
+
+
+class Image(models.Model):
+
+    # Relationships
+    created_by = models.ForeignKey("myapp.AppUser", on_delete=models.CASCADE, related_name='images')
+    route = models.ForeignKey("myapp.route", on_delete=models.CASCADE, related_name='images')
+
+    # Fields
+    title = models.CharField(max_length=100)
+    created = models.DateTimeField(auto_now_add=True, editable=False)
+    last_updated = models.DateTimeField(auto_now=True, editable=False)
+    image = models.ImageField(upload_to=custom_upload_to)
+
+    class Meta:
+        pass
+
+    def __str__(self):
+        return str(self.pk)
+
+    def get_absolute_url(self):
+        return reverse("myapp_Image_detail", args=(self.pk,))
+
+    def get_update_url(self):
+        return reverse("myapp_Image_update", args=(self.pk,))

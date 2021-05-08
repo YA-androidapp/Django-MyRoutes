@@ -2,24 +2,24 @@
 {% block content %}
 
 <div>
-    <ul class="list-group"></ul>
-    {% for object in object_list %}
-    <li class="list-group-item">
-        <div>
-            <a href="{{object.get_absolute_url}}">{{object.username}}</a>
-            <span class="badge badge-primary badge-pill">{{object.routes.count}}</span>
-        </div>
+    <ul class="list-group">
+        {% for object in object_list %}
+        <li class="list-group-item">
+            <div>
+                <a href="{{object.get_absolute_url}}">{{object.username}}</a>
+                <span class="badge badge-primary badge-pill">{{object.routes.count}}</span>
+            </div>
 
-        <ul class="list-group">
-            {% for route in object.routes.all %}
-            <li class="list-group-item">
-                <a href="{{route.get_absolute_url}}">{{route.name}}</a>
-            </li>
-            {% endfor %}
-        </ul>
+            <ul class="list-group">
+                {% for route in object.routes.all %}
+                <li class="list-group-item">
+                    <a href="{{route.get_absolute_url}}">{{route.name}}</a>
+                </li>
+                {% endfor %}
+            </ul>
 
-    </li>
-    {% endfor %}
+        </li>
+        {% endfor %}
     </ul>
 </div>
 {% endblock %}

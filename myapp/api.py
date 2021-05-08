@@ -18,3 +18,11 @@ class AppUserViewSet(viewsets.ModelViewSet):
     queryset = models.AppUser.objects.all()
     serializer_class = serializers.AppUserSerializer
     permission_classes = [permissions.IsAuthenticated]
+
+
+class ImageViewSet(viewsets.ModelViewSet):
+    """ViewSet for the image class"""
+
+    queryset = models.Image.objects.all()
+    serializer_class = serializers.ImageSerializer
+    permission_classes = [permissions.IsAuthenticated]

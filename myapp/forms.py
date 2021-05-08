@@ -39,3 +39,13 @@ class AppUserForm(forms.ModelForm):
     class Meta:
         model = models.AppUser
         fields = []
+
+
+class ImageForm(forms.ModelForm):
+    class Meta:
+        model = models.Image
+        fields = [
+            "title",
+            "image",
+            "route",
+        ]

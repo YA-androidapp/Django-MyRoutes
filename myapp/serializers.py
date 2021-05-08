@@ -22,3 +22,15 @@ class AppUserSerializer(serializers.ModelSerializer):
             "last_updated",
             "created",
         ]
+
+
+class ImageSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.Image
+        fields = [
+            "title",
+            "created",
+            "last_updated",
+            "image",
+        ]

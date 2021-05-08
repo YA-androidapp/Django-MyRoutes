@@ -8,19 +8,19 @@
 <div id="map" class="m-3" style="width: 600px; height: 600px"></div>
 
 <div>
-    <ul class="list-group"></ul>
-    {% for object in object_list %}
-    <li class="list-group-item">
-        <div>
-            <a href="{{object.get_absolute_url}}">{{object.name}}</a>
-        </div>
-        <div class="pl-3">
-            <small>
-                <a href="{{object.created_by.get_absolute_url}}">{{object.created_by.username}}</a>
-            </small>
-        </div>
-    </li>
-    {% endfor %}
+    <ul class="list-group">
+        {% for object in object_list %}
+        <li class="list-group-item">
+            <div>
+                <a href="{{object.get_absolute_url}}">{{object.name}}</a>
+            </div>
+            <div class="pl-3">
+                <small>
+                    <a href="{{object.created_by.get_absolute_url}}">{{object.created_by.username}}</a>
+                </small>
+            </div>
+        </li>
+        {% endfor %}
     </ul>
 </div>
 {% endblock %}

@@ -61,3 +61,33 @@ class AppUserListView(generic.ListView):
 class AppUserDetailView(LoginRequiredMixin, generic.DetailView):
     model = models.AppUser
     form_class = forms.AppUserForm
+
+class ImageListView(generic.ListView):
+    model = models.Image
+    form_class = forms.ImageForm
+
+
+class ImageCreateView(LoginRequiredMixin, generic.CreateView):
+    model = models.Image
+    form_class = forms.ImageForm
+
+    def get_context_data(self, **kwargs):
+        print(self.get_template_names())
+        context = super(ImageCreateView, self).get_context_data(**kwargs)
+        context['routes'] = models.Route.objects.all()
+        return context
+
+    def form_valid(self, form):
+        form.instance.created_by_id = self.request.user.id
+        return super(ImageCreateView, self).form_valid(form)
+
+
+class ImageDetailView(LoginRequiredMixin, generic.DetailView):
+    model = models.Image
+    form_class = forms.ImageForm
+
+
+class ImageUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = models.Image
+    form_class = forms.ImageForm
+    pk_url_kwarg = "pk"

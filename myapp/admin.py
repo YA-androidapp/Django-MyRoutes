@@ -53,5 +53,27 @@ class AppUserAdmin(UserAdmin):
     filter_horizontal = ()
 
 
+class ImageAdminForm(forms.ModelForm):
+    class Meta:
+        model = models.Image
+        fields = "__all__"
+
+
+class ImageAdmin(admin.ModelAdmin):
+    form = ImageAdminForm
+    list_display = [
+        "title",
+        "created",
+        "last_updated",
+        "image",
+    ]
+    readonly_fields = [
+        "last_updated",
+        "created",
+        "created_by",
+    ]
+
+
 admin.site.register(models.Route, RouteAdmin)
 admin.site.register(models.AppUser, AppUserAdmin)
+admin.site.register(models.Image, ImageAdmin)

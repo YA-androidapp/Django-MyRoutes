@@ -14,6 +14,18 @@
                 {% for route in object.routes.all %}
                 <li class="list-group-item">
                     <a href="{{route.get_absolute_url}}">{{route.name}}</a>
+                    <ul class="list-group">
+                        {% for image in route.images.all %}
+                        <li class="list-group-item">
+                            <a href="{{image.get_absolute_url}}">
+                                <img src="/media/{{image.image}}" alt="{{image.title}}" class="img-thumbnail"
+                                    style="max-width: 100px; max-height: 100px;">
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                {{image.title}}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
                 </li>
                 {% endfor %}
             </ul>

@@ -26,8 +26,8 @@ urlpatterns = (
          name="myapp_AppUser_list"),
     path("user/detail/<int:pk>/",
          views.AppUserDetailView.as_view(), name="myapp_AppUser_detail"),
-    path("myapp/image/", views.ImageListView.as_view(), name="myapp_Image_list"),
-    path("myapp/image/create/", views.ImageCreateView.as_view(), name="myapp_Image_create"),
-    path("myapp/image/detail/<int:pk>/", views.ImageDetailView.as_view(), name="myapp_Image_detail"),
-    path("myapp/image/update/<int:pk>/", views.ImageUpdateView.as_view(), name="myapp_Image_update"),
+    path("image/", views.ImageListView.as_view(), name="myapp_Image_list"),
+    path("image/create/", views.ImageCreateView.as_view(), name="myapp_Image_create"),
+    path("image/detail/<int:pk>/", views.ImageDetailView.as_view(), name="myapp_Image_detail"),
+    path("image/update/<int:pk>/", views.ImageUpdateView.as_view(), name="myapp_Image_update"),
 )

@@ -5,6 +5,7 @@
 ```sh
 python -m venv myenv
 source myenv/bin/activate
+python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
 
 python manage.py makemigrations

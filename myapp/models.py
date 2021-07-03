@@ -4,12 +4,12 @@ from django.contrib.auth.models import AbstractUser
 from django.core.validators import FileExtensionValidator
 
 import hashlib
+import os
 from datetime import datetime
 
 def custom_upload_to(instance, filename):
     current_time = datetime.now()
-    print('instance', instance)
-    pre_hash_name = '{}{}'.format(filename, current_time)
+    pre_hash_name = '{}{}'.format(os.path.basename(filename), current_time)
     extension = str(filename).split('.')[-1]
     hs_filename = '{}.{}'.format(hashlib.md5(pre_hash_name.encode()).hexdigest(), extension)
     saved_path = 'upload/files/'

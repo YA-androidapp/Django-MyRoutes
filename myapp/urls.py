@@ -10,7 +10,7 @@ router.register("Route", api.RouteViewSet)
 router.register("AppUser", api.AppUserViewSet)
 router.register("Image", api.ImageViewSet)
 
-urlpatterns = (
+urlpatterns = [
     path("api/v1/", include(router.urls)),
     path("route/", views.RouteListView.as_view(), name="myapp_Route_list"),
     path("route/create/", views.RouteCreateView.as_view(),
@@ -30,4 +30,4 @@ urlpatterns = (
     path("image/create/", views.ImageCreateView.as_view(), name="myapp_Image_create"),
     path("image/detail/<int:pk>/", views.ImageDetailView.as_view(), name="myapp_Image_detail"),
     path("image/update/<int:pk>/", views.ImageUpdateView.as_view(), name="myapp_Image_update"),
-)
+]

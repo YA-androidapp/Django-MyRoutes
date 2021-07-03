@@ -44,7 +44,7 @@ class RouteDeleteView(LoginRequiredMixin, UserPassesTestMixin, generic.edit.Dele
 
 def custom_upload_to(filename):
     current_time = datetime.now()
-    pre_hash_name = '{}{}'.format(filename, current_time)
+    pre_hash_name = '{}{}'.format(os.path.basename(filename), current_time)
     extension = str(filename).split('.')[-1]
     hs_filename = '{}.{}'.format(hashlib.md5(pre_hash_name.encode()).hexdigest(), extension)
     saved_path = 'upload/files/'
@@ -61,7 +61,6 @@ class RouteMultiUploadView(LoginRequiredMixin, generic.FormView):
         name = form.data.get('name')
         for file in file_list:
             filestem = os.path.splitext(os.path.basename(file))[0]
-            print("file", file, ":", custom_upload_to(file))
             models.Route.objects.create(name = name + ' ' + filestem, file = custom_upload_to(file), created_by_id = self.request.user.id)
         return super().form_valid(form)
 

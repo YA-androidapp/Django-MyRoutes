@@ -44,9 +44,10 @@ class RouteDeleteView(LoginRequiredMixin, UserPassesTestMixin, generic.edit.Dele
 
 def custom_upload_to(filename):
     current_time = datetime.now()
-    pre_hash_name = '{}{}'.format(os.path.basename(filename), current_time)
+    pre_hash_name = os.path.basename(filename)
     extension = str(filename).split('.')[-1]
     hs_filename = '{}.{}'.format(hashlib.md5(pre_hash_name.encode()).hexdigest(), extension)
+    print('pre_hash_name, hs_filename', pre_hash_name, hs_filename)
     saved_path = 'upload/files/'
     return '{}{}'.format(saved_path, hs_filename)
 

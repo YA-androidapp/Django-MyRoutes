@@ -12,7 +12,7 @@ def custom_upload_to(instance, filename):
     if bname.startswith('hashed_') and len(bname) == (7 + 32 + 1 + 3):
         return filename
     else:
-        current_time = datetime.now().strftime('%Y%m%d%H%M%S')
+        current_time = datetime.now().strftime('%Y%m%d%H')
         pre_hash_name = '{}_{}'.format(current_time, os.path.basename(filename))
         extension = str(filename).split('.')[-1]
         hs_filename = 'hashed_{}.{}'.format(hashlib.md5(pre_hash_name.encode()).hexdigest(), extension)

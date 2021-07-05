@@ -43,12 +43,18 @@ class RouteDeleteView(LoginRequiredMixin, UserPassesTestMixin, generic.edit.Dele
 
 
 def custom_upload_to(filename):
-    current_time = datetime.now()
-    pre_hash_name = os.path.basename(filename)
-    extension = str(filename).split('.')[-1]
-    hs_filename = '{}.{}'.format(hashlib.md5(pre_hash_name.encode()).hexdigest(), extension)
-    saved_path = 'upload/files/'
-    return '{}{}'.format(saved_path, hs_filename)
+    bname = os.path.basename(filename)
+    if bname.startswith('hashed_') and len(bname) == (7 + 32 + 1 + 3):
+        return filename
+    else:
+        current_time = datetime.now().strftime('%Y%m%d%H%M%S')
+        pre_hash_name = '{}_{}'.format(current_time, os.path.basename(filename))
+        extension = str(filename).split('.')[-1]
+        hs_filename = 'hashed_{}.{}'.format(hashlib.md5(pre_hash_name.encode()).hexdigest(), extension)
+        saved_path = 'upload/files/'
+        filepath = '{}{}'.format(saved_path, hs_filename)
+        print('filename, filepath', filename, filepath)
+        return filepath
 
 
 class RouteMultiUploadView(LoginRequiredMixin, generic.FormView):
